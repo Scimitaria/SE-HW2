@@ -1,0 +1,13 @@
+<%- include('../partials/head') %>
+</head>
+<body>
+    <ul>
+        <% recipes.forEach((recipe)=> { %>
+            <li>
+                <%=recipe.RecipeName%>
+            </li>
+            <hr />
+        <% }) %>
+    </ul>
+</body>
+</html>
