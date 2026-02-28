@@ -2,3 +2,10 @@ body{
     background-color: darkcyan;/*rgb(57,255,20) to be annoying*/
     color: blue;
 }
+.button{
+    background-color: black;
+    width:fit-content;
+    color: red;
+    border-radius: 50px;
+    padding: 5px;
+}

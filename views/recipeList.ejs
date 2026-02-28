@@ -4,10 +4,10 @@
     <ul>
         <% recipes.forEach((recipe)=> { %>
             <li>
-                <%=recipe.RecipeName%>
+                <a href="./recipe/<%=recipe%>"><%=recipe.RecipeName%></a>
             </li>
-            <hr />
         <% }) %>
     </ul>
 </body>
 </html>
+<%- include('../partials/foot') %>
