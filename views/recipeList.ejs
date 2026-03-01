@@ -5,6 +5,12 @@
         <% recipes.forEach((recipe)=> { %>
             <li>
                 <a href="./recipe/<%=recipe%>"><%=recipe.RecipeName%></a>
+                <%
+                    connection.query(`SELECT * FROM ingredients WHERE RecipeID = ${recipe.RecipeID}`, (err,results) => {
+                        if(err) throw err;
+                        res.render(results);
+                    });
+                %>
             </li>
         <% }) %>
     </ul>

@@ -28,7 +28,7 @@ app.get('/addRecipe', (req, res) => {
 
 app.get('/recipeList', (req, res) => {
     let sql = 'SELECT * FROM recipes';
- 
+
     connection.query(sql, (err, result) => {
         if(err) throw err;
         console.log(result);
@@ -40,13 +40,14 @@ app.get('/recipeList', (req, res) => {
 });
 
 router.post("/add_recipe", function (req, res) {
-    //make next RecipeID
+    //make next IDs
     const mr = db.query('SELECT MAX(RecipeID) AS maxID FROM recipes');
     const id = (mr.rows ? mr.rows[0].max_value : mr[0].max_value) + 1;
 
-	let sql = 
-        `INSERT INTO recipes(title, id)
-        VALUES (?, ${id})`;
+	let sql = `
+        INSERT INTO recipes(RecipeName, RecipeID) VALUES (?, ${id});
+        INSERT INTO ingredients(RecipeID, Quantity, Ingredient) VALUES (${id}, ?, ?);
+    `;
 	console.log(req.body);
     db.query(sql,[req.body.title, req.body.ingredients], (err, result) => {
         if(err) throw err;
