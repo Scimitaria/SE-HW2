@@ -6,7 +6,7 @@ app.set('view engine','ejs');
 const port = 9001;
 app.use(express.static(path.join(__dirname, 'public')));
  
-var connection = require('./database');
+const connection = require('./database');
 
 app.listen(port, function () {
   console.log(`Recipe app listening on port ${port}!`);
@@ -16,6 +16,17 @@ app.get('/', (req, res) => {
     res.render('home', function (err,html) {
         if (err) console.error(err);
         res.send(html);
+    });
+});
+
+app.get('/recipe/:recipeID', (req,res) => {
+    const recipeID = req.params.recipeID;
+    connection.query(`SELECT * FROM recipes WHERE RecipeID = ?`,recipeID, (err, result) => {
+        //res.render('recipe',{recipe : result[0]});
+        res.render('recipe', {recipe: result[0]}, function(err,html){
+            if(err)console.error(err);
+            res.send(html);
+        });
     });
 });
 
@@ -32,7 +43,7 @@ app.get('/recipeList', (req, res) => {
     connection.query(sql, (err, result) => {
         if(err) throw err;
         console.log(result);
-        res.render('recipe', {recipes: result}, function (err,html) {
+        res.render('recipeList', {recipes: result}, function (err,html) {
             if (err) console.error(err);
             res.send(html);
         });
@@ -44,9 +55,10 @@ router.post("/add_recipe", function (req, res) {
     const mr = db.query('SELECT MAX(RecipeID) AS maxID FROM recipes');
     const id = (mr.rows ? mr.rows[0].max_value : mr[0].max_value) + 1;
 
+    //Should ingredient insertion be here or in addRecipe?
 	let sql = `
         INSERT INTO recipes(RecipeName, RecipeID) VALUES (?, ${id});
-        INSERT INTO ingredients(RecipeID, Quantity, Ingredient) VALUES (${id}, ?, ?);
+        INSERT INTO ingredients(RecipeID, Ingredient, Description) VALUES (${id}, ?, ?);
     `;
 	console.log(req.body);
     db.query(sql,[req.body.title, req.body.ingredients], (err, result) => {
