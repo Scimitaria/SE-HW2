@@ -4,12 +4,14 @@
     "ejs": "^4.0.1",
     "express": "^5.2.1",
     "mysql": "^2.18.1",
-    "mysql2": "^3.18.2"
+    "mysql2": "^3.18.2",
+    "nodemon": "^3.1.14"
   },
   "devDependencies": {
     "eslint": "^9.39.3"
   },
   "scripts": {
-    "start": "node app.js"
+    "start": "node app.js",
+    "dev": "nodemon app.js"
   }
 }

@@ -5,7 +5,7 @@ const router = express.Router();
 app.set('view engine','ejs');
 const port = 9001;
 app.use(express.static(path.join(__dirname, 'public')));
- 
+
 const connection = require('./database');
 
 app.listen(port, function () {
@@ -21,9 +21,14 @@ app.get('/', (req, res) => {
 
 app.get('/recipe/:recipeID', (req,res) => {
     const recipeID = req.params.recipeID;
-    connection.query(`SELECT * FROM recipes WHERE RecipeID = ?`,recipeID, (err, result) => {
-        //res.render('recipe',{recipe : result[0]});
-        res.render('recipe', {recipe: result[0]}, function(err,html){
+    const sql = `
+        SELECT recipes.RecipeID, RecipeName, Ingredient, Description
+        FROM recipes, ingredients
+        WHERE recipes.RecipeID = ingredients.RecipeID
+        AND recipes.RecipeID = ?;
+    `;
+    connection.query(sql, recipeID, (err, result) => {
+        res.render('recipe', {ingredients: result}, function(err,html){
             if(err)console.error(err);
             res.send(html);
         });

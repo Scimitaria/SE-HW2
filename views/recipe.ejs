@@ -1,6 +1,13 @@
 <%- include('../partials/head') %>
 </head>
 <body>
-    <% console.log(recipe) %>
-    <p><%=recipe.RecipeID%></p>
+    <p><%=ingredients[0].RecipeName%></p>
+    <ul>
+        <% ingredients.forEach((ingredient)=> { %>
+            <li>
+                <p class="hover-container"><%= ingredient.Ingredient %></p>
+                <p class="popup"><%= ingredient.Description %></p>
+            </li>
+        <% }) %>
+    </ul>
 <%- include('../partials/foot') %>
