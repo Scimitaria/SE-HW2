@@ -5,9 +5,10 @@
     <ul>
         <% ingredients.forEach((ingredient)=> { %>
             <li>
-                <p class="hover-container"><%= ingredient.Ingredient %></p>
-                <p class="popup"><%= ingredient.Description %></p>
+                <div class="hover-container" style="width:fit-content"><%= ingredient.Ingredient %></p>
+                <div class="popup" style="border: 2px solid black; background-color: white;"><%= ingredient.Description %></p>
             </li>
+            <br>
         <% }) %>
     </ul>
 <%- include('../partials/foot') %>
