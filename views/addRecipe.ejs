@@ -1,19 +1,35 @@
 <%- include('../partials/head') %>
-<form action="./add_recipe" method="post">
-	<label for="title">Recipe title:</label>
-	<input type="text" id="title" name="title"><br>
-	<label for="ingredients">Choose ingredients:</label><br>
-	<select name="ingredients" id="ingredients" multiple>
-		<% ingredients.forEach((i)=> { %>
-		<option value=<%=i.Ingredient%>><%=i.Ingredient%></option>
-		<% }) %>
-	</select><br>
-	<label for="protein">Choose protein:</label><br>
-	<select name="protein" id="protein">
-		<% proteins.forEach((p)=> { %>
-		<option value=<%=p.Protein%>><%=p.Protein%></option>
-		<% }) %>
-	</select><br><br>
-	<input type="submit" value="Submit">
-</form>
+	<script>
+		function validateForm() {
+		  if (document.forms["ar"]["title"].value == "") {
+		    alert("Recipe name must be filled out");
+		    return false;
+		  } if (document.forms["ar"]["ingredients"].selectedOptions.length === 0) {
+		    alert("Ingredients must be selected");
+		    return false;
+		  } if (document.forms["ar"]["protein"].value == "") {
+		    alert("Protein must be selected");
+		    return false;
+		  } return true;
+		}
+	</script>
+</head>
+<body>
+	<form name="ar" action="./add_recipe" onsubmit="return validateForm()" method="post">
+		<label for="title">Recipe title:</label>
+		<input type="text" id="title" name="title"><br>
+		<label for="ingredients">Choose ingredients:</label><br>
+		<select name="ingredients" id="ingredients" multiple>
+			<% ingredients.forEach((i)=> { %>
+			<option value=<%=i.Ingredient%>><%=i.Ingredient%></option>
+			<% }) %>
+		</select><br>
+		<label for="protein">Choose protein:</label><br>
+		<select name="protein" id="protein">
+			<% proteins.forEach((p)=> { %>
+			<option value=<%=p.Protein%>><%=p.Protein%></option>
+			<% }) %>
+		</select><br><br>
+		<input type="submit" value="Submit">
+	</form>
 <%- include('../partials/foot') %>
