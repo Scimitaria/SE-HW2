@@ -2,7 +2,7 @@
 </head>
 <body>
     <div style="width:fit-content">
-        <p>Beef</p>
+        <p style="font-weight: bold;">Beef</p>
         <ul>
             <% beef.forEach((recipe)=> { %>
                 <li>
@@ -12,9 +12,19 @@
         </ul>
         <br>
         <hr>
-        <p>Chicken</p>
+        <p style="font-weight: bold;">Chicken</p>
         <ul>
             <% chicken.forEach((recipe)=> { %>
+                <li>
+                    <a href="./recipe/<%=recipe.RecipeID%>"><%=recipe.RecipeName%></a>
+                </li>
+            <% }) %>
+        </ul>
+        <br>
+        <hr>
+        <p style="font-weight: bold;">Pork</p>
+        <ul>
+            <% pork.forEach((recipe)=> { %>
                 <li>
                     <a href="./recipe/<%=recipe.RecipeID%>"><%=recipe.RecipeName%></a>
                 </li>

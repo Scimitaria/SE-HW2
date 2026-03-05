@@ -1,12 +1,13 @@
 <%- include('../partials/head') %>
 </head>
 <body>
-    <p><%=ingredients[0].RecipeName%></p>
+    <h3><%=ingredients[0].RecipeName%></h3>
+    <p style="font-weight: bold;">Ingredients:</p>
     <ul>
         <% ingredients.forEach((ingredient)=> { %>
             <li>
-                <div class="hover-container" style="width:fit-content"><%= ingredient.Ingredient %></p>
-                <div class="popup" style="border: 2px solid black; background-color: white;"><%= ingredient.Description %></p>
+                <div class="hover-container" style="width:fit-content;"><%= ingredient.Ingredient %></p>
+                <div class="popup" style="border: 2px solid black; background-color: green;"><%= ingredient.Description %></p>
             </li>
             <br>
         <% }) %>

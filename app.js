@@ -8,6 +8,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.urlencoded({extended:false}));
 
 const connection = require('./database');
+//export SQL with mysqldump -u root -p <dbname> --single-transaction > <fname>.sql
 
 app.listen(port, function () {
   console.log(`Recipe app listening on port ${port}!`);
@@ -56,9 +57,10 @@ app.get('/recipeList', (req, res) => {
     connection.query(sql, (err, result) => {
         if(err) throw err;
         //console.log(result);
+        const pork = result.filter(r => r.Protein === 'Pork');
         const beef = result.filter(r => r.Protein === 'Beef');
         const chicken = result.filter(r => r.Protein === 'Chicken');
-        res.render('recipeList', {chicken, beef}, function (err,html) {
+        res.render('recipeList', {chicken, beef, pork}, function (err,html) {
             if (err) console.error(err);
             res.send(html);
         });

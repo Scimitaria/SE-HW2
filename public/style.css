@@ -12,7 +12,6 @@ body{
 }
 .popup {
     display: none;
-    /* Add positioning and styling here (background, border, etc.) */
     position: relative;
     z-index: 1;
 }
