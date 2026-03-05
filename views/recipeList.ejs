@@ -1,13 +1,24 @@
 <%- include('../partials/head') %>
 </head>
 <body>
-    <ul>
-        <% recipes.forEach((recipe)=> { %>
-            <li>
-                <%# Should be categorized by protein type %>
-                <%# style="border: 2px solid black;" %>
-                <a href="./recipe/<%=recipe.RecipeID%>"><%=recipe.RecipeName%></a>
-            </li>
-        <% }) %>
-    </ul>
+    <div style="width:fit-content">
+        <p>Beef</p>
+        <ul>
+            <% beef.forEach((recipe)=> { %>
+                <li>
+                    <a href="./recipe/<%=recipe.RecipeID%>"><%=recipe.RecipeName%></a>
+                </li>
+            <% }) %>
+        </ul>
+        <br>
+        <hr>
+        <p>Chicken</p>
+        <ul>
+            <% chicken.forEach((recipe)=> { %>
+                <li>
+                    <a href="./recipe/<%=recipe.RecipeID%>"><%=recipe.RecipeName%></a>
+                </li>
+            <% }) %>
+        </ul>
+    </div>
 <%- include('../partials/foot') %>
